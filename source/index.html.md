@@ -29,7 +29,7 @@ The Assessment API base URL is at the following location: `https://www.selfmgmt.
 
 # Authorization
 
-In order to authorize your API queries, you will need to create a token using your set of public and private keys (currently supplied to you by Self Management Group).  In the future you will be able to manage your own keys and callback URLs through our Profile Admin Center (contact our team at [support@selfmgmt.com](mailto:support@selfmgmt.com) for further details).
+In order to authorize your API queries, you will need to create a token using your set of public and private keys (currently supplied to you by Self Management Group).
 
 <aside class="notice">
 All endpoints except “echo” must be authorized.
@@ -128,8 +128,10 @@ curl -H "Authorization:Bearer <token>" https://www.selfmgmt.com/api/v1/assess/po
 
 ```json
 {
- "assessment_link":"https://www.selfmgmt.com/api/v1/assess/?t=pops&l=eng&c=f61cLxTZ0uOqwqPNA",
- "assessment_id":"D2lFYf45VVbXqdWARl4l4DgpizTumY28"
+  "assessment": {
+    "link": https://www.selfmgmt.com/pac/assess/FQQcc4sU5hll7XQO0PlQ72ZIwwcpVX8kzfb”
+    "id": "cc4sU5hll7XQO0PlQ72ZIwwcpVX8kzfb"
+  }
 }
 ```
 

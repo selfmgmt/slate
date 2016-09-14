@@ -4,10 +4,8 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>SMG Assessment API Reference</title>
 
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -88,10 +86,12 @@
   color: #90a959;
 }
     </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;curl&quot;,&quot;ruby&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -101,9 +101,8 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="curl">curl</a>
               <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -112,8 +111,8 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://www.selfmgmt.com/contact-us/'>Contact us for API Access</a></li>
+            <li><a href='https://www.selfmgmt.com'>About Self Mangement Group</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -121,167 +120,487 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to Self Management Group&rsquo;s Assessment API documentation. The SMG Assessment API allows you to gain access to the assessment tools offered by the Self Management Group.  Key functions are made available for consumers to integrate our assessment tools into your custom applications.</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>Our Assessment API is RESTful. Each request has an associated HTTP verb which must be used. Certain endpoints accept resources/posted data as part of the request.</p>
 
-<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
+<p>All requests must be made via SSL (HTTPS), and non-SSL requests will be ignored.  Each request requires authorization through the use of bearer tokens.</p>
 
-<h1 id="authentication">Authentication</h1>
+<p>The Assessment API base URL is at the following location: <code class="prettyprint">https://www.selfmgmt.com/api/v1</code></p>
+
+<h1 id="authorization">Authorization</h1>
+
+<p>In order to authorize your API queries, you will need to create a token using your set of public and private keys (currently supplied to you by Self Management Group).  In the future you will be able to manage your own keys and callback URLs through our Profile Admin Center (contact our team at <a href="mailto:support@selfmgmt.com">support@selfmgmt.com</a> for further details).</p>
+
+<aside class="notice">
+All endpoints except “echo” must be authorized.
+</aside>
+
+<h1 id="generating-a-token">Generating a Token</h1>
 
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<pre class="highlight shell"><code>curl  --user <span class="s2">"your_public_key:your_private_key"</span> <span class="se">\</span>
+  -d <span class="s2">"grant_type=client_credentials"</span> <span class="se">\</span>
+  https://www.selfmgmt.com/api/v1/oauth/token
 </code></pre>
 
 <blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
+<p>If successful, the following typical JSON object will be returned:</p>
 </blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-<h1 id="kittens">Kittens</h1>
-
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"access_token"</span><span class="p">:</span><span class="s2">"f61cLMAODCPrxTZ0uOqwqPNAwNAe8OgIxQzlGRUQzU1OTY4Mjc5RkQxMEI5QkMyNEJERjc3QTczNw"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"token_type"</span><span class="p">:</span><span class="s2">"Bearer"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"expires_in"</span><span class="p">:</span><span class="mi">3600</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves all kittens.</p>
+<blockquote>
+<p>Error messages are returned in a JSON array with a code, reason and detail. A typical message is:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"errors"</span><span class="p">:[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+     </span><span class="nt">"code"</span><span class="p">:</span><span class="s2">"401"</span><span class="p">,</span><span class="w">
+     </span><span class="nt">"reason"</span><span class="p">:</span><span class="s2">"unauthorized"</span><span class="p">,</span><span class="w">
+     </span><span class="nt">"detail"</span><span class="p">:</span><span class="s2">"invalid_credentials"</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<h3 id="http-request">HTTP Request</h3>
+<p>To create a token you must send an authorization header (basic authorization) using your public key and private keys within a POST request.  The endpoint to reach is:</p>
 
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
+<p><code class="prettyprint">https://www.selfmgmt.com/api/v1/oauth/token</code></p>
 
-<h3 id="query-parameters">Query Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+<aside class="notice">
+Make sure to replace `your_public_key` and `your_private_key` with your respective keys.
 </aside>
 
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p>To use this token in any endpoint, add this authorization header to your requests:</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p><code class="prettyprint">Authorization:Bearer &lt;token&gt;</code></p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<h1 id="endpoints">Endpoints</h1>
+
+<h2 id="echo">/echo</h2>
+<pre class="highlight shell"><code>curl https://www.selfmgmt.com/api/v1/echo/Hello%20World!
 </code></pre>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="nt">"result"</span><span class="p">:</span><span class="s2">"Hello World!"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
+<p>Used to test that you are connected</p>
 
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<p>e.g. <code class="prettyprint">https://www.selfmgmt.com/api/v1/echo/Hello%20World!</code></p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p>This endpoint does not require authorization and only accepts the <code class="prettyprint">GET</code> method.</p>
 
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<h2 id="oauth-token">/oauth/token</h2>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization:Bearer &lt;token&gt;"</span> https://www.selfmgmt.com/api/v1/oauth/token
+</code></pre>
 
-<h3 id="url-parameters">URL Parameters</h3>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"access_token"</span><span class="p">:</span><span class="s2">"f61cLMAODCPrxTZ0uOqwqPNAwNAe8OgIxQzlGRUQzU1OTY4Mjc5RkQxMEI5QkMyNEJERjc3QTczNw"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"token_type"</span><span class="p">:</span><span class="s2">"Bearer"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"expires_in"</span><span class="p">:</span><span class="mi">3554</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Used to create tokens <code class="prettyprint">POST</code> as well as retrieve information about tokens <code class="prettyprint">GET</code>.  See the section “Generating a Token” on how to create a token.  Below is an example using curl to view a token (using the <code class="prettyprint">GET</code> method).</p>
+
+<h2 id="assess">/assess</h2>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization:Bearer &lt;token&gt;"</span> https://www.selfmgmt.com/api/v1/assess/pops/eng
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+ </span><span class="nt">"assessment_link"</span><span class="p">:</span><span class="s2">"https://www.selfmgmt.com/api/v1/assess/?t=pops&amp;l=eng&amp;c=f61cLxTZ0uOqwqPNA"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"assessment_id"</span><span class="p">:</span><span class="s2">"D2lFYf45VVbXqdWARl4l4DgpizTumY28"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Returns a link to complete an assessment. Both the assessment acronym and language are specified in the endpoint. See the Appendix for assessment acronymns and language codes.</p>
+
+<aside class="notice">
+As with all endpoints put the actual token value in place of <code>&lt;token&gt;</code>
+</aside>
+
+<p>Note: this will return a randomly generated 36 alpha numeric string that we provide for you.  This is will be required to retrieve results (see the the results endpoint).</p>
+
+<p>e.g. <code class="prettyprint">&quot;assessment_id&quot;:&quot;D2lFYf45VVbXqdWARl4l4DgpizTumY28&quot;</code></p>
+
+<h3 id="pre-populating-form-data">Pre-populating Form Data</h3>
+
+<p>We can pre-populate information on the assessments to avoid having the candidate re-enter information you have on file.</p>
 
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Fields</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>firstname</td>
+<td>The first name of the candidate</td>
+</tr>
+<tr>
+<td>lastname</td>
+<td>The last name of the candidate</td>
+</tr>
+<tr>
+<td>address</td>
+<td>The street address of the candidate</td>
+</tr>
+<tr>
+<td>city</td>
+<td>The city of the candidate</td>
+</tr>
+<tr>
+<td>zipcode</td>
+<td>The zip/postal code of the candidate</td>
+</tr>
+<tr>
+<td>country</td>
+<td>The country of the candidate</td>
+</tr>
+<tr>
+<td>telephone</td>
+<td>The telephone number of the candidate</td>
+</tr>
+<tr>
+<td>email</td>
+<td>The email address of the candidate</td>
 </tr>
 </tbody></table>
 
-          <h1 id="errors">Errors</h1>
+<p>Simply append the name=value pair(s) onto the querystring of the assessment link you receive. For example:</p>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+<p><code class="prettyprint">https://www.selfmgmt.com/pac/assess/?t=pops&amp;l=eng&amp;c=f61cPNA&amp;firstname=jane&amp;lastname=doe</code></p>
 
-<p>The Kittn API uses the following error codes:</p>
+<h2 id="results">/results</h2>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization:Bearer &lt;token&gt;"</span>  https://www.selfmgmt.com/api/results/pops/eng/idValue
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"records"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016/08/16"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"personal"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"firstname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sample"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"lastname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Candidate"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123 Main St."</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Toronto"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ontario"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N2T 2J8"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"416-555-1212"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample@yahoo.com"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"scores"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"talent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"effort"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"opport"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"recommendation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Proceed"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"stoplight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Green"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"reports"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"manager"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://selfmgmt.com/api/v1/reports/pops/m/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"candidate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://selfmgmt.com/ api/v1/reports/pops/c/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Retrieves results from an assessment taken.  You must pass the test type (e.g, POPS), the language (e.g., en), followed by the ID we generate for you passed to us in the <code class="prettyprint">/assess</code> endpoint.</p>
+
+<p>If you have a callback url, the test taker will be redirected to the page once they click on a Continue Button after the results are saved.  All form data will be posted as well.</p>
+
+          <h1 id="language-codes">Language Codes</h1>
+
+<p>Our assessments are available in many languages.  Contact the Self Management Group for futher information on availabilty and language support.</p>
+
+<aside class="warning">
+Not all languages are available for every assessment.
+</aside>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Language</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>eng</td>
+<td>English</td>
+</tr>
+<tr>
+<td>ara</td>
+<td>Arabic</td>
+</tr>
+<tr>
+<td>asm</td>
+<td>Assamese</td>
+</tr>
+<tr>
+<td>ben</td>
+<td>Bengali</td>
+</tr>
+<tr>
+<td>bul</td>
+<td>Bulgarian</td>
+</tr>
+<tr>
+<td>chi</td>
+<td>Chinese (Simplified)</td>
+</tr>
+<tr>
+<td>cht</td>
+<td>Chinese (Traditional)</td>
+</tr>
+<tr>
+<td>cze</td>
+<td>Czech</td>
+</tr>
+<tr>
+<td>dut</td>
+<td>Dutch</td>
+</tr>
+<tr>
+<td>est</td>
+<td>Estonian</td>
+</tr>
+<tr>
+<td>far</td>
+<td>Farsi</td>
+</tr>
+<tr>
+<td>fra</td>
+<td>French (France)</td>
+</tr>
+<tr>
+<td>fre</td>
+<td>French</td>
+</tr>
+<tr>
+<td>ger</td>
+<td>German</td>
+</tr>
+<tr>
+<td>grk</td>
+<td>Greek</td>
+</tr>
+<tr>
+<td>guj</td>
+<td>Gujarati</td>
+</tr>
+<tr>
+<td>hin</td>
+<td>Hindi</td>
+</tr>
+<tr>
+<td>hun</td>
+<td>Hungarian</td>
+</tr>
+<tr>
+<td>ind</td>
+<td>Indonesian</td>
+</tr>
+<tr>
+<td>ita</td>
+<td>Italian</td>
+</tr>
+<tr>
+<td>jap</td>
+<td>Japanese</td>
+</tr>
+<tr>
+<td>kan</td>
+<td>Kannada</td>
+</tr>
+<tr>
+<td>jhm</td>
+<td>Khmer</td>
+</tr>
+<tr>
+<td>kor</td>
+<td>Korean</td>
+</tr>
+<tr>
+<td>lit</td>
+<td>Lithuanian</td>
+</tr>
+<tr>
+<td>mal</td>
+<td>Malay</td>
+</tr>
+<tr>
+<td>mam</td>
+<td>Malayalam</td>
+</tr>
+<tr>
+<td>mar</td>
+<td>Marathi</td>
+</tr>
+<tr>
+<td>ori</td>
+<td>Oriya</td>
+</tr>
+<tr>
+<td>pol</td>
+<td>Polish</td>
+</tr>
+<tr>
+<td>ptb</td>
+<td>Portuguese (Brazil)</td>
+</tr>
+<tr>
+<td>pun</td>
+<td>Punjabi</td>
+</tr>
+<tr>
+<td>rom</td>
+<td>Romanian</td>
+</tr>
+<tr>
+<td>rus</td>
+<td>Russian</td>
+</tr>
+<tr>
+<td>slo</td>
+<td>Slovak</td>
+</tr>
+<tr>
+<td>spa</td>
+<td>Spanish (Latin American)</td>
+</tr>
+<tr>
+<td>sp2</td>
+<td>Spanish (Spain)</td>
+</tr>
+<tr>
+<td>tag</td>
+<td>Tagalog</td>
+</tr>
+<tr>
+<td>tai</td>
+<td>Taiwanese</td>
+</tr>
+<tr>
+<td>tam</td>
+<td>Tamil</td>
+</tr>
+<tr>
+<td>tel</td>
+<td>Telugu</td>
+</tr>
+<tr>
+<td>tha</td>
+<td>Thai</td>
+</tr>
+<tr>
+<td>tur</td>
+<td>Turkish</td>
+</tr>
+<tr>
+<td>ukr</td>
+<td>Ukranian</td>
+</tr>
+<tr>
+<td>vie</td>
+<td>Vietnamese</td>
+</tr>
+</tbody></table>
+
+          <h1 id="assessment-codes">Assessment Codes</h1>
+
+<p>Use the acronym in the endpoints where appropriate.  We add new assessments on a per demand basis. Contact the Self Management Group for futher information on availabilty and language support.</p>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Assessment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>lpro</td>
+<td>LeaderPro</td>
+</tr>
+<tr>
+<td>mpp3</td>
+<td>ManagementPro 3.0</td>
+</tr>
+<tr>
+<td>pops</td>
+<td>Popscreen</td>
+</tr>
+<tr>
+<td>pop5</td>
+<td>Personal Orientation Profile 5.0</td>
+</tr>
+<tr>
+<td>pop6</td>
+<td>Personal Orientation Profile 6.0</td>
+</tr>
+<tr>
+<td>pop7</td>
+<td>Personal Orientation Profile 7.0</td>
+</tr>
+<tr>
+<td>spro</td>
+<td>SalesPro</td>
+</tr>
+</tbody></table>
+
+          <h1 id="error-messages">Error Messages</h1>
+
+<blockquote>
+<p>If you attempt to initiate a request that does not contain a supported verb for the endpoint, you will get a message as follows:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+   </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"405"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"method_not_allowed"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"allowed_methods: GET"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>All other errors should be self-explanatory as seen from the example below where an invalid token was sent to the endpoint:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bad_request"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid_token_error"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>All messages are returned in a <code class="prettyprint">JSON</code> array with with the keyword <code class="prettyprint">errors</code> being the top level node. Contents include an error code, a reason and a detail. The http status code is also returned in the http response.</p>
 
 <table><thead>
 <tr>
@@ -291,39 +610,35 @@ Remember — a happy kitten is an authenticated kitten!
 </thead><tbody>
 <tr>
 <td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
+<td>Bad Request</td>
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
+<td>Unauthorized</td>
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+<td>Forbidden</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
+<td>Not Found</td>
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+<td>Method Not Allowed</td>
 </tr>
 <tr>
 <td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+<td>Not Acceptable</td>
 </tr>
 <tr>
 <td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
+<td>Gone</td>
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+<td>Too Many Requests</td>
 </tr>
 <tr>
 <td>500</td>
@@ -338,9 +653,8 @@ Remember — a happy kitten is an authenticated kitten!
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="curl">curl</a>
                 <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
           </div>
       </div>
     </div>

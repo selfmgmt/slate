@@ -1,20 +1,44 @@
-# Errors
+# Error Messages
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
+> If you attempt to initiate a request that does not contain a supported verb for the endpoint, you will get a message as follows:
 
-The Kittn API uses the following error codes:
+```json
+{
+  "errors": [
+   {
+      "code": "405",
+      "reason": "method_not_allowed",
+      "detail": "allowed_methods: GET"
+    }
+  ]
+}
+```
 
+> All other errors should be self-explanatory as seen from the example below where an invalid token was sent to the endpoint:
+
+```json
+{
+  "errors": [
+    {
+      "code": "400",
+      "reason": "bad_request",
+      "detail": "invalid_token_error"
+    }
+  ]
+}
+```
+
+All messages are returned in a `JSON` array with with the keyword `errors` being the top level node. Contents include an error code, a reason and a detail. The http status code is also returned in the http response.
 
 Error Code | Meaning
 ---------- | -------
-400 | Bad Request -- Your request sucks
-401 | Unauthorized -- Your API key is wrong
-403 | Forbidden -- The kitten requested is hidden for administrators only
-404 | Not Found -- The specified kitten could not be found
-405 | Method Not Allowed -- You tried to access a kitten with an invalid method
-406 | Not Acceptable -- You requested a format that isn't json
-410 | Gone -- The kitten requested has been removed from our servers
-418 | I'm a teapot
-429 | Too Many Requests -- You're requesting too many kittens! Slow down!
+400 | Bad Request
+401 | Unauthorized
+403 | Forbidden
+404 | Not Found
+405 | Method Not Allowed
+406 | Not Acceptable
+410 | Gone
+429 | Too Many Requests
 500 | Internal Server Error -- We had a problem with our server. Try again later.
 503 | Service Unavailable -- We're temporarially offline for maintanance. Please try again later.

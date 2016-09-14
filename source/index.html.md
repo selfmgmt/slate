@@ -1,17 +1,17 @@
 ---
-title: API Reference
+title: SMG Assessment API Reference
 
 language_tabs:
-  - shell
+  - curl
   - ruby
-  - python
-  - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
+  - <a href='https://www.selfmgmt.com/contact-us/'>Contact us for API Access</a>
+  - <a href='https://www.selfmgmt.com'>About Self Mangement Group</a>
 
 includes:
+  - languages
+  - assessments
   - errors
 
 search: true
@@ -19,171 +19,192 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to Self Management Group's Assessment API documentation. The SMG Assessment API allows you to gain access to the assessment tools offered by the Self Management Group.  Key functions are made available for consumers to integrate our assessment tools into your custom applications.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+Our Assessment API is RESTful. Each request has an associated HTTP verb which must be used. Certain endpoints accept resources/posted data as part of the request.
 
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+All requests must be made via SSL (HTTPS), and non-SSL requests will be ignored.  Each request requires authorization through the use of bearer tokens.
 
-# Authentication
+The Assessment API base URL is at the following location: `https://www.selfmgmt.com/api/v1`
+
+# Authorization
+
+In order to authorize your API queries, you will need to create a token using your set of public and private keys (currently supplied to you by Self Management Group).  In the future you will be able to manage your own keys and callback URLs through our Profile Admin Center (contact our team at [support@selfmgmt.com](mailto:support@selfmgmt.com) for further details).
+
+<aside class="notice">
+All endpoints except “echo” must be authorized.
+</aside>
+
+# Generating a Token
 
 > To authorize, use this code:
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+curl  --user "your_public_key:your_private_key" \
+  -d "grant_type=client_credentials" \
+  https://www.selfmgmt.com/api/v1/oauth/token
 ```
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
+> If successful, the following typical JSON object will be returned:
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+{
+  "access_token":"f61cLMAODCPrxTZ0uOqwqPNAwNAe8OgIxQzlGRUQzU1OTY4Mjc5RkQxMEI5QkMyNEJERjc3QTczNw",
+  "token_type":"Bearer",
+  "expires_in":3600
+}
 ```
 
-This endpoint retrieves all kittens.
+> Error messages are returned in a JSON array with a code, reason and detail. A typical message is:
 
-### HTTP Request
+```json
+{
+  "errors":[
+    {
+     "code":"401",
+     "reason":"unauthorized",
+     "detail":"invalid_credentials"
+     }
+    ]
+}
+```
 
-`GET http://example.com/api/kittens`
+To create a token you must send an authorization header (basic authorization) using your public key and private keys within a POST request.  The endpoint to reach is:
 
-### Query Parameters
+`https://www.selfmgmt.com/api/v1/oauth/token`
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+<aside class="notice">
+Make sure to replace `your_public_key` and `your_private_key` with your respective keys.
 </aside>
 
-## Get a Specific Kitten
+To use this token in any endpoint, add this authorization header to your requests:
 
-```ruby
-require 'kittn'
+`Authorization:Bearer <token>`
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
+# Endpoints
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
+## /echo
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
+curl https://www.selfmgmt.com/api/v1/echo/Hello%20World!
 ```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "result":"Hello World!"
 }
 ```
 
-This endpoint retrieves a specific kitten.
+Used to test that you are connected
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+e.g. `https://www.selfmgmt.com/api/v1/echo/Hello%20World!`
 
-### HTTP Request
+This endpoint does not require authorization and only accepts the `GET` method.
 
-`GET http://example.com/kittens/<ID>`
+## /oauth/token
 
-### URL Parameters
+```shell
+curl -H "Authorization:Bearer <token>" https://www.selfmgmt.com/api/v1/oauth/token
+```
+> The above command returns JSON structured like this:
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+```json
+{
+  "access_token":"f61cLMAODCPrxTZ0uOqwqPNAwNAe8OgIxQzlGRUQzU1OTY4Mjc5RkQxMEI5QkMyNEJERjc3QTczNw",
+  "token_type":"Bearer",
+  "expires_in":3554
+}
+```
+
+Used to create tokens `POST` as well as retrieve information about tokens `GET`.  See the section “Generating a Token” on how to create a token.  Below is an example using curl to view a token (using the `GET` method).
+
+## /assess
+
+```shell
+curl -H "Authorization:Bearer <token>" https://www.selfmgmt.com/api/v1/assess/pops/eng
+```
+> The above command returns JSON structured like this:
+
+```json
+{
+ "assessment_link":"https://www.selfmgmt.com/api/v1/assess/?t=pops&l=eng&c=f61cLxTZ0uOqwqPNA",
+ "assessment_id":"D2lFYf45VVbXqdWARl4l4DgpizTumY28"
+}
+```
+
+Returns a link to complete an assessment. Both the assessment acronym and language are specified in the endpoint. See the Appendix for assessment acronymns and language codes.
+
+<aside class="notice">
+As with all endpoints put the actual token value in place of <code>&lt;token&gt;</code>
+</aside>
+
+Note: this will return a randomly generated 36 alpha numeric string that we provide for you.  This is will be required to retrieve results (see the the results endpoint).
+
+e.g. `"assessment_id":"D2lFYf45VVbXqdWARl4l4DgpizTumY28"`
+
+### Pre-populating Form Data
+
+We can pre-populate information on the assessments to avoid having the candidate re-enter information you have on file.
+
+Fields | Description
+------ | -----------
+firstname | The first name of the candidate
+lastname | The last name of the candidate
+address | The street address of the candidate
+city | The city of the candidate
+zipcode | The zip/postal code of the candidate
+country | The country of the candidate
+telephone | The telephone number of the candidate
+email | The email address of the candidate
+
+Simply append the name=value pair(s) onto the querystring of the assessment link you receive. For example:
+
+`https://www.selfmgmt.com/pac/assess/?t=pops&l=eng&c=f61cPNA&firstname=jane&lastname=doe`
+
+## /results
+
+```shell
+curl -H "Authorization:Bearer <token>"  https://www.selfmgmt.com/api/results/pops/eng/idValue
+```
+> The above command returns JSON structured like this:
+
+```json
+{
+  "records": [
+    {
+      "id": "B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq",
+      "date": "2016/08/16",
+      "personal": {
+        "firstname": "Sample",
+        "lastname": "Candidate",
+        "gender": "",
+        "address": "123 Main St.",
+        "city": "Toronto",
+        "state": "Ontario",
+        "zipcode": "N2T 2J8",
+        "country": "Canada",
+        "telephone": "416-555-1212",
+        "email": "sample@yahoo.com"
+      },
+      "scores": {
+        "talent": "3.0",
+        "effort": "4.0",
+        "opport": "5.0",
+        "total": "4.0",
+        "recommendation": "Proceed",
+        "stoplight": "Green"
+      },
+      "reports": {
+        "manager": "https://selfmgmt.com/api/v1/reports/pops/m/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq",
+        "candidate": "https://selfmgmt.com/ api/v1/reports/pops/c/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq"
+      }
+    }
+  ]
+}
+```
+
+Retrieves results from an assessment taken.  You must pass the test type (e.g, POPS), the language (e.g., en), followed by the ID we generate for you passed to us in the `/assess` endpoint.
+
+If you have a callback url, the test taker will be redirected to the page once they click on a Continue Button after the results are saved.  All form data will be posted as well.
 

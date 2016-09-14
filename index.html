@@ -130,7 +130,7 @@
 
 <h1 id="authorization">Authorization</h1>
 
-<p>In order to authorize your API queries, you will need to create a token using your set of public and private keys (currently supplied to you by Self Management Group).  In the future you will be able to manage your own keys and callback URLs through our Profile Admin Center (contact our team at <a href="mailto:support@selfmgmt.com">support@selfmgmt.com</a> for further details).</p>
+<p>In order to authorize your API queries, you will need to create a token using your set of public and private keys (currently supplied to you by Self Management Group).</p>
 
 <aside class="notice">
 All endpoints except “echo” must be authorized.
@@ -226,8 +226,10 @@ Make sure to replace `your_public_key` and `your_private_key` with your respecti
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
- </span><span class="nt">"assessment_link"</span><span class="p">:</span><span class="s2">"https://www.selfmgmt.com/api/v1/assess/?t=pops&amp;l=eng&amp;c=f61cLxTZ0uOqwqPNA"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"assessment_id"</span><span class="p">:</span><span class="s2">"D2lFYf45VVbXqdWARl4l4DgpizTumY28"</span><span class="w">
+  </span><span class="nt">"assessment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="err">https://www.selfmgmt.com/pac/assess/FQQcc</span><span class="mi">4</span><span class="err">sU</span><span class="mi">5</span><span class="err">hll</span><span class="mi">7</span><span class="err">XQO</span><span class="mi">0</span><span class="err">PlQ</span><span class="mi">72</span><span class="err">ZIwwcpVX</span><span class="mi">8</span><span class="err">kzfb”</span><span class="w">
+    </span><span class="s2">"id"</span><span class="err">:</span><span class="w"> </span><span class="s2">"cc4sU5hll7XQO0PlQ72ZIwwcpVX8kzfb"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -629,24 +631,12 @@ Not all languages are available for every assessment.
 <td>Method Not Allowed</td>
 </tr>
 <tr>
-<td>406</td>
-<td>Not Acceptable</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests</td>
-</tr>
-<tr>
 <td>500</td>
 <td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
 </tr>
 <tr>
 <td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarily offline for maintenance. Please try again later.</td>
 </tr>
 </tbody></table>
 

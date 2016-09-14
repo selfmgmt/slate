@@ -129,7 +129,7 @@ curl -H "Authorization:Bearer <token>" https://www.selfmgmt.com/api/v1/assess/po
 ```json
 {
   "assessment": {
-    "link": https://www.selfmgmt.com/pac/assess/FQQcc4sU5hll7XQO0PlQ72ZIwwcpVX8kzfb”
+    "link": "https://www.selfmgmt.com/pac/assess/FQQcc4sU5hll7XQO0PlQ72ZIwwcpVX8kzfb"
     "id": "cc4sU5hll7XQO0PlQ72ZIwwcpVX8kzfb"
   }
 }

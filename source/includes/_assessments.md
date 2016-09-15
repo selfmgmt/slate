@@ -6,7 +6,7 @@ Code | Assessment
 ---- | ----------
 lpro | LeaderPro
 mpp3 | ManagementPro 3.0
-pops | Popscreen
+pops | POPScreen
 pop5 | Personal Orientation Profile 5.0
 pop6 | Personal Orientation Profile 6.0
 pop7 | Personal Orientation Profile 7.0

@@ -37,5 +37,5 @@ Error Code | Meaning
 403 | Forbidden
 404 | Not Found
 405 | Method Not Allowed
-500 | Internal Server Error -- We had a problem with our server. Try again later.
+500 | Internal Server Error -- We had a problem with our server. Please try again later.
 503 | Service Unavailable -- We're temporarily offline for maintenance. Please try again later.

@@ -6,7 +6,7 @@
 {
   "errors": [
    {
-      "code": "405",
+      "code": 405,
       "reason": "method_not_allowed",
       "detail": "allowed_methods: GET"
     }
@@ -20,7 +20,7 @@
 {
   "errors": [
     {
-      "code": "400",
+      "code": 400,
       "reason": "bad_request",
       "detail": "invalid_token_error"
     }

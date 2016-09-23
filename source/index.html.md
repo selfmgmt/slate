@@ -32,7 +32,7 @@ The Assessment API base URL is at the following location: `https://www.selfmgmt.
 In order to authorize your API queries, you will need to create a token using your set of public and private keys (currently supplied to you by Self Management Group).
 
 <aside class="notice">
-All endpoints except “echo” must be authorized.
+All endpoints except “echoString” must be authorized.
 </aside>
 
 # Generating a Token
@@ -49,9 +49,9 @@ curl  --user "your_public_key:your_private_key" \
 
 ```json
 {
-  "access_token":"f61cLMAODCPrxTZ0uOqwqPNAwNAe8OgIxQzlGRUQzU1OTY4Mjc5RkQxMEI5QkMyNEJERjc3QTczNw",
-  "token_type":"Bearer",
-  "expires_in":3600
+  "access_token": "f61cLMAODCPrxTZ0uOqwqPNAwNAe8OgIxQzlGRUQzU1OTY4Mjc5RkQxMEI5QkMyNEJERjc3QTczNw",
+  "token_type": "Bearer",
+  "expires_in": 3600
 }
 ```
 
@@ -61,9 +61,9 @@ curl  --user "your_public_key:your_private_key" \
 {
   "errors":[
     {
-     "code":"401",
-     "reason":"unauthorized",
-     "detail":"invalid_credentials"
+     "code": 401,
+     "reason": "unauthorized",
+     "detail": "invalid_credentials"
      }
     ]
 }
@@ -83,22 +83,22 @@ To use this token in any endpoint, add this authorization header to your request
 
 # Endpoints
 
-## /echo
+## /echoString
 
 ```shell
-curl https://www.selfmgmt.com/api/v1/echo/Hello%20World!
+curl https://www.selfmgmt.com/api/v1/echoString/Hello%20World!
 ```
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "result":"Hello World!"
+  "result": "Hello World!"
 }
 ```
 
 Used to test that you are connected
 
-e.g. `https://www.selfmgmt.com/api/v1/echo/Hello%20World!`
+e.g. `https://www.selfmgmt.com/api/v1/echoString/Hello%20World!`
 
 This endpoint does not require authorization and only accepts the `GET` method.
 
@@ -111,18 +111,18 @@ curl -H "Authorization:Bearer <token>" https://www.selfmgmt.com/api/v1/oauth/tok
 
 ```json
 {
-  "access_token":"f61cLMAODCPrxTZ0uOqwqPNAwNAe8OgIxQzlGRUQzU1OTY4Mjc5RkQxMEI5QkMyNEJERjc3QTczNw",
-  "token_type":"Bearer",
-  "expires_in":3554
+  "access_token": "f61cLMAODCPrxTZ0uOqwqPNAwNAe8OgIxQzlGRUQzU1OTY4Mjc5RkQxMEI5QkMyNEJERjc3QTczNw",
+  "token_type": "Bearer",
+  "expires_in": 3554
 }
 ```
 
 Used to create tokens `POST` as well as retrieve information about tokens `GET`.  See the section “Generating a Token” on how to create a token.  Below is an example using curl to view a token (using the `GET` method).
 
-## /assess
+## /assessmentLink
 
 ```shell
-curl -H "Authorization:Bearer <token>" https://www.selfmgmt.com/api/v1/assess/pops/eng
+curl -H "Authorization:Bearer <token>" https://www.selfmgmt.com/api/v1/assessmentLink/pops/eng
 ```
 > The above command returns JSON structured like this:
 
@@ -143,7 +143,7 @@ As with all endpoints put the actual token value in place of <code>&lt;token&gt;
 
 Note: this will return a randomly generated 36 alpha numeric string that we provide for you.  This is will be required to retrieve results (see the the results endpoint).
 
-e.g. `"assessment_id":"D2lFYf45VVbXqdWARl4l4DgpizTumY28"`
+e.g. `"assessment_id": "D2lFYf45VVbXqdWARl4l4DgpizTumY28"`
 
 ### Pre-populating Form Data
 
@@ -162,12 +162,12 @@ email | The email address of the candidate
 
 Simply append the name=value pair(s) onto the querystring of the assessment link you receive. For example:
 
-`https://www.selfmgmt.com/pac/assess/?t=pops&l=eng&c=f61cPNA&firstname=jane&lastname=doe`
+`https://www.selfmgmt.com/pac/assessmentLink/?t=pops&l=eng&c=f61cPNA&firstname=jane&lastname=doe`
 
-## /results
+## /assessmentResults
 
 ```shell
-curl -H "Authorization:Bearer <token>"  https://www.selfmgmt.com/api/results/pops/eng/idValue
+curl -H "Authorization:Bearer <token>"  https://www.selfmgmt.com/api/assessmentResults/pops/eng/idValue
 ```
 > The above command returns JSON structured like this:
 

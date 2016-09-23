@@ -141,7 +141,7 @@ Returns a link to complete an assessment. Both the assessment acronym and langua
 As with all endpoints put the actual token value in place of <code>&lt;token&gt;</code>
 </aside>
 
-Note: this will return a randomly generated 36 alpha numeric string that we provide for you.  This is will be required to retrieve results (see the the results endpoint).
+Note: this will return a randomly generated 36 alpha numeric string that we provide for you.  This is will be required to retrieve results (see the the assessmentResults endpoint).
 
 e.g. `"assessment_id": "D2lFYf45VVbXqdWARl4l4DgpizTumY28"`
 
@@ -206,7 +206,7 @@ curl -H "Authorization:Bearer <token>"  https://www.selfmgmt.com/api/assessmentR
 }
 ```
 
-Retrieves results from an assessment taken.  You must pass the test type (e.g, POPS), the language (e.g., en), followed by the ID we generate for you passed to us in the `/assess` endpoint.
+Retrieves results from an assessment taken.  You must pass the test type (e.g, POPS), the language (e.g., en), followed by the ID we generate for you passed to us in the `/assessmentLink` endpoint.
 
 If you have a callback url, the test taker will be redirected to the page once they click on a Continue Button after the results are saved.  All form data will be posted as well.
 

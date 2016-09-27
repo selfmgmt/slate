@@ -21,7 +21,7 @@ search: true
 
 Welcome to Self Management Group's Assessment API documentation. The SMG Assessment API allows you to gain access to the assessment tools offered by the Self Management Group.  Key functions are made available for consumers to integrate our assessment tools into your custom applications.
 
-Our Assessment API is RESTful. Each request has an associated HTTP verb which must be used. Certain endpoints accept resources/posted data as part of the request.
+Our Assessment API is RESTful. Each request has an associated HTTP verb which must be used. Certain endpoints accept resources and/or posted data as part of the request.
 
 All requests must be made via SSL (HTTPS), and non-SSL requests will be ignored.  Each request requires authorization through the use of bearer tokens.
 
@@ -98,7 +98,7 @@ curl https://www.selfmgmt.com/api/v1/echoString/Hello%20World!
 
 Used to test that you are connected
 
-e.g. `https://www.selfmgmt.com/api/v1/echoString/Hello%20World!`
+e.g., `https://www.selfmgmt.com/api/v1/echoString/Hello%20World!`
 
 This endpoint does not require authorization and only accepts the `GET` method.
 
@@ -143,7 +143,7 @@ As with all endpoints put the actual token value in place of <code>&lt;token&gt;
 
 Note: this will return a randomly generated 36 alpha numeric string that we provide for you.  This is will be required to retrieve results (see the the assessmentResults endpoint).
 
-e.g. `"assessment_id": "D2lFYf45VVbXqdWARl4l4DgpizTumY28"`
+e.g., `"id": "D2lFYf45VVbXqdWARl4l4DgpizTumY28"`
 
 ### Pre-populating Form Data
 
@@ -162,7 +162,7 @@ email | The email address of the candidate
 
 Simply append the name=value pair(s) onto the querystring of the assessment link you receive. For example:
 
-`https://www.selfmgmt.com/pac/assessmentLink/?t=pops&l=eng&c=f61cPNA&firstname=jane&lastname=doe`
+`https://www.selfmgmt.com/pac/assess/?t=pops&l=eng&c=f61cPNA&firstname=jane&lastname=doe`
 
 ## /assessmentResults
 

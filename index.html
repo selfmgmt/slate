@@ -122,7 +122,7 @@
 
 <p>Welcome to Self Management Group&rsquo;s Assessment API documentation. The SMG Assessment API allows you to gain access to the assessment tools offered by the Self Management Group.  Key functions are made available for consumers to integrate our assessment tools into your custom applications.</p>
 
-<p>Our Assessment API is RESTful. Each request has an associated HTTP verb which must be used. Certain endpoints accept resources/posted data as part of the request.</p>
+<p>Our Assessment API is RESTful. Each request has an associated HTTP verb which must be used. Certain endpoints accept resources and/or posted data as part of the request.</p>
 
 <p>All requests must be made via SSL (HTTPS), and non-SSL requests will be ignored.  Each request requires authorization through the use of bearer tokens.</p>
 
@@ -198,7 +198,7 @@ Make sure to replace `your_public_key` and `your_private_key` with your respecti
 
 <p>Used to test that you are connected</p>
 
-<p>e.g. <code class="prettyprint">https://www.selfmgmt.com/api/v1/echoString/Hello%20World!</code></p>
+<p>e.g., <code class="prettyprint">https://www.selfmgmt.com/api/v1/echoString/Hello%20World!</code></p>
 
 <p>This endpoint does not require authorization and only accepts the <code class="prettyprint">GET</code> method.</p>
 
@@ -241,7 +241,7 @@ As with all endpoints put the actual token value in place of <code>&lt;token&gt;
 
 <p>Note: this will return a randomly generated 36 alpha numeric string that we provide for you.  This is will be required to retrieve results (see the the assessmentResults endpoint).</p>
 
-<p>e.g. <code class="prettyprint">&quot;assessment_id&quot;: &quot;D2lFYf45VVbXqdWARl4l4DgpizTumY28&quot;</code></p>
+<p>e.g., <code class="prettyprint">&quot;id&quot;: &quot;D2lFYf45VVbXqdWARl4l4DgpizTumY28&quot;</code></p>
 
 <h3 id="pre-populating-form-data">Pre-populating Form Data</h3>
 
@@ -289,7 +289,7 @@ As with all endpoints put the actual token value in place of <code>&lt;token&gt;
 
 <p>Simply append the name=value pair(s) onto the querystring of the assessment link you receive. For example:</p>
 
-<p><code class="prettyprint">https://www.selfmgmt.com/pac/assessmentLink/?t=pops&amp;l=eng&amp;c=f61cPNA&amp;firstname=jane&amp;lastname=doe</code></p>
+<p><code class="prettyprint">https://www.selfmgmt.com/pac/assess/?t=pops&amp;l=eng&amp;c=f61cPNA&amp;firstname=jane&amp;lastname=doe</code></p>
 
 <h2 id="assessmentresults">/assessmentResults</h2>
 <pre class="highlight shell"><code>curl -H <span class="s2">"Authorization:Bearer &lt;token&gt;"</span>  https://www.selfmgmt.com/api/assessmentResults/pops/eng/idValue
@@ -553,10 +553,6 @@ Not all languages are available for every assessment.
 <tr>
 <td>pops</td>
 <td>POPScreen</td>
-</tr>
-<tr>
-<td>pop5</td>
-<td>Personal Orientation Profile 5.0</td>
 </tr>
 <tr>
 <td>pop6</td>

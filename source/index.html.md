@@ -227,14 +227,6 @@ response.parsed
         "telephone": "416-555-1212",
         "email": "sample@yahoo.com"
       },
-      "scores": {
-        "talent": "3.0",
-        "effort": "4.0",
-        "opport": "5.0",
-        "total": "4.0",
-        "recommendation": "Proceed",
-        "stoplight": "Green"
-      },
       "reports": {
         "manager": "https://selfmgmt.com/api/v1/reports/pops/m/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq",
         "candidate": "https://selfmgmt.com/ api/v1/reports/pops/c/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq"

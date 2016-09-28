@@ -145,16 +145,20 @@ All endpoints except “echoString” must be authorized.
   -d <span class="s2">"grant_type=client_credentials"</span> <span class="se">\</span>
   https://www.selfmgmt.com/api/v1/oauth/token
 </code></pre>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'oauth2'</span>
+<pre class="highlight ruby"><code><span class="c1"># Require the oauth2 gem</span>
+<span class="nb">require</span> <span class="s1">'oauth2'</span>
 
 <span class="no">CLIENT_KEY</span> <span class="o">=</span> <span class="s1">'CLIENT_KEY'</span>
 <span class="no">CLIENT_SECRET</span> <span class="o">=</span> <span class="s1">'CLIENT_SECRET'</span>
 
+<span class="c1"># This method will be used in the subsequent examples to generate a token object.</span>
+<span class="c1"># However, you do not need to regenerate a token for each request if you save the token to a variable.</span>
 <span class="k">def</span> <span class="nf">get_token</span>
   <span class="n">client</span> <span class="o">=</span> <span class="no">OAuth2</span><span class="o">::</span><span class="no">Client</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">CLIENT_KEY</span><span class="p">,</span> <span class="no">CLIENT_SECRET</span><span class="p">,</span> <span class="ss">site: </span><span class="s1">'https://www.selfmgmt.com/api/v1'</span><span class="p">,</span> <span class="ss">token_url: </span><span class="s1">'/api/v1/oauth/token'</span><span class="p">)</span>
   <span class="n">client</span><span class="p">.</span><span class="nf">client_credentials</span><span class="p">.</span><span class="nf">get_token</span>
 
 <span class="k">rescue</span> <span class="no">OAuth2</span><span class="o">::</span><span class="no">Error</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="c1"># If the auth request fails, the error data will be in the errors key of the response hash:</span>
   <span class="n">e</span><span class="p">.</span><span class="nf">response</span><span class="p">.</span><span class="nf">parsed</span><span class="p">[</span><span class="s1">'errors'</span><span class="p">]</span>
 <span class="k">end</span>
 </code></pre>

@@ -91,7 +91,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;curl&quot;,&quot;ruby&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -101,7 +101,7 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="curl">curl</a>
+              <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="ruby">ruby</a>
         </div>
         <div class="search">
@@ -145,6 +145,19 @@ All endpoints except “echoString” must be authorized.
   -d <span class="s2">"grant_type=client_credentials"</span> <span class="se">\</span>
   https://www.selfmgmt.com/api/v1/oauth/token
 </code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'oauth2'</span>
+
+<span class="no">CLIENT_KEY</span> <span class="o">=</span> <span class="s1">'CLIENT_KEY'</span>
+<span class="no">CLIENT_SECRET</span> <span class="o">=</span> <span class="s1">'CLIENT_SECRET'</span>
+
+<span class="k">def</span> <span class="nf">get_token</span>
+  <span class="n">client</span> <span class="o">=</span> <span class="no">OAuth2</span><span class="o">::</span><span class="no">Client</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">CLIENT_KEY</span><span class="p">,</span> <span class="no">CLIENT_SECRET</span><span class="p">,</span> <span class="ss">site: </span><span class="s1">'https://www.selfmgmt.com/api/v1'</span><span class="p">,</span> <span class="ss">token_url: </span><span class="s1">'/api/v1/oauth/token'</span><span class="p">)</span>
+  <span class="n">client</span><span class="p">.</span><span class="nf">client_credentials</span><span class="p">.</span><span class="nf">get_token</span>
+
+<span class="k">rescue</span> <span class="no">OAuth2</span><span class="o">::</span><span class="no">Error</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="n">e</span><span class="p">.</span><span class="nf">response</span><span class="p">.</span><span class="nf">parsed</span><span class="p">[</span><span class="s1">'errors'</span><span class="p">]</span>
+<span class="k">end</span>
+</code></pre>
 
 <blockquote>
 <p>If successful, the following typical JSON object will be returned:</p>
@@ -187,6 +200,10 @@ Make sure to replace `your_public_key` and `your_private_key` with your respecti
 <h2 id="echostring">/echoString</h2>
 <pre class="highlight shell"><code>curl https://www.selfmgmt.com/api/v1/echoString/Hello%20World!
 </code></pre>
+<pre class="highlight ruby"><code><span class="n">token</span> <span class="o">=</span> <span class="n">get_token</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">token</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'echoString/Hello%20World'</span><span class="p">)</span>
+<span class="n">response</span><span class="p">.</span><span class="nf">parsed</span>
+</code></pre>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -205,6 +222,10 @@ Make sure to replace `your_public_key` and `your_private_key` with your respecti
 <h2 id="oauth-token">/oauth/token</h2>
 <pre class="highlight shell"><code>curl -H <span class="s2">"Authorization:Bearer &lt;token&gt;"</span> https://www.selfmgmt.com/api/v1/oauth/token
 </code></pre>
+<pre class="highlight ruby"><code><span class="n">token</span> <span class="o">=</span> <span class="n">get_token</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">token</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'oauth/token'</span><span class="p">)</span>
+<span class="n">response</span><span class="p">.</span><span class="nf">parsed</span>
+</code></pre>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -220,6 +241,10 @@ Make sure to replace `your_public_key` and `your_private_key` with your respecti
 
 <h2 id="assessmentlink">/assessmentLink</h2>
 <pre class="highlight shell"><code>curl -H <span class="s2">"Authorization:Bearer &lt;token&gt;"</span> https://www.selfmgmt.com/api/v1/assessmentLink/pops/eng
+</code></pre>
+<pre class="highlight ruby"><code><span class="n">token</span> <span class="o">=</span> <span class="n">get_token</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">token</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'assessmentLink/pops/eng'</span><span class="p">)</span>
+<span class="n">response</span><span class="p">.</span><span class="nf">parsed</span>
 </code></pre>
 
 <blockquote>
@@ -293,6 +318,10 @@ As with all endpoints put the actual token value in place of <code>&lt;token&gt;
 
 <h2 id="assessmentresults">/assessmentResults</h2>
 <pre class="highlight shell"><code>curl -H <span class="s2">"Authorization:Bearer &lt;token&gt;"</span>  https://www.selfmgmt.com/api/assessmentResults/pops/eng/idValue
+</code></pre>
+<pre class="highlight ruby"><code><span class="n">token</span> <span class="o">=</span> <span class="n">get_token</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">token</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'assessmentResults/pops/eng/idValue'</span><span class="p">)</span>
+<span class="n">response</span><span class="p">.</span><span class="nf">parsed</span>
 </code></pre>
 
 <blockquote>
@@ -639,7 +668,7 @@ Not all languages are available for every assessment.
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="curl">curl</a>
+                <a href="#" data-language-name="shell">shell</a>
                 <a href="#" data-language-name="ruby">ruby</a>
           </div>
       </div>

@@ -2,7 +2,7 @@
 title: SMG Assessment API Reference
 
 language_tabs:
-  - curl
+  - shell
   - ruby
 
 toc_footers:
@@ -43,6 +43,20 @@ All endpoints except “echoString” must be authorized.
 curl  --user "your_public_key:your_private_key" \
   -d "grant_type=client_credentials" \
   https://www.selfmgmt.com/api/v1/oauth/token
+```
+```ruby
+require 'oauth2'
+
+CLIENT_KEY = 'CLIENT_KEY'
+CLIENT_SECRET = 'CLIENT_SECRET'
+
+def get_token
+  client = OAuth2::Client.new(CLIENT_KEY, CLIENT_SECRET, site: 'https://www.selfmgmt.com/api/v1', token_url: '/api/v1/oauth/token')
+  client.client_credentials.get_token
+
+rescue OAuth2::Error => e
+  e.response.parsed['errors']
+end
 ```
 
 > If successful, the following typical JSON object will be returned:
@@ -88,6 +102,11 @@ To use this token in any endpoint, add this authorization header to your request
 ```shell
 curl https://www.selfmgmt.com/api/v1/echoString/Hello%20World!
 ```
+```ruby
+token = get_token
+response = token.get('echoString/Hello%20World')
+response.parsed
+```
 > The above command returns JSON structured like this:
 
 ```json
@@ -107,6 +126,11 @@ This endpoint does not require authorization and only accepts the `GET` method.
 ```shell
 curl -H "Authorization:Bearer <token>" https://www.selfmgmt.com/api/v1/oauth/token
 ```
+```ruby
+token = get_token
+response = token.get('oauth/token')
+response.parsed
+```
 > The above command returns JSON structured like this:
 
 ```json
@@ -123,6 +147,11 @@ Used to create tokens `POST` as well as retrieve information about tokens `GET`.
 
 ```shell
 curl -H "Authorization:Bearer <token>" https://www.selfmgmt.com/api/v1/assessmentLink/pops/eng
+```
+```ruby
+token = get_token
+response = token.get('assessmentLink/pops/eng')
+response.parsed
 ```
 > The above command returns JSON structured like this:
 
@@ -168,6 +197,11 @@ Simply append the name=value pair(s) onto the querystring of the assessment link
 
 ```shell
 curl -H "Authorization:Bearer <token>"  https://www.selfmgmt.com/api/assessmentResults/pops/eng/idValue
+```
+```ruby
+token = get_token
+response = token.get('assessmentResults/pops/eng/idValue')
+response.parsed
 ```
 > The above command returns JSON structured like this:
 

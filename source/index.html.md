@@ -2,8 +2,8 @@
 title: SMG Assessment API Reference
 
 language_tabs:
-  - shell
-  - ruby
+  - shell: curl
+  - ruby: Ruby
 
 toc_footers:
   - <a href='https://www.selfmgmt.com/contact-us/'>Contact us for API Access</a>

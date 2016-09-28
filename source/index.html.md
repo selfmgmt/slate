@@ -45,16 +45,20 @@ curl  --user "your_public_key:your_private_key" \
   https://www.selfmgmt.com/api/v1/oauth/token
 ```
 ```ruby
+# Require the oauth2 gem
 require 'oauth2'
 
 CLIENT_KEY = 'CLIENT_KEY'
 CLIENT_SECRET = 'CLIENT_SECRET'
 
+# This method will be used in the subsequent examples to generate a token object.
+# However, you do not need to regenerate a token for each request if you save the token to a variable.
 def get_token
   client = OAuth2::Client.new(CLIENT_KEY, CLIENT_SECRET, site: 'https://www.selfmgmt.com/api/v1', token_url: '/api/v1/oauth/token')
   client.client_credentials.get_token
 
 rescue OAuth2::Error => e
+  # If the auth request fails, the error data will be in the errors key of the response hash:
   e.response.parsed['errors']
 end
 ```

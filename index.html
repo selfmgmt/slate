@@ -256,7 +256,7 @@ Make sure to replace `your_public_key` and `your_private_key` with your respecti
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"assessment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.selfmgmt.com/assess/?t=lpro&amp;l=eng&amp;c=MinTz2S5hhdp8fjcyTMas9dnTk1NDhBFQQcc4sU5hll7X8kzfb&amp;b=smg"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.selfmgmt.com/assess/lpro/eng/MinTz2S5hhdp8fjcyTMas9dnTk1NDhBFQQcc4sU5hll7X8kzfb/smg"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cc4sU5hll7XQO0PlQ72ZIwwcpVX8kzfb"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -318,7 +318,7 @@ As with all endpoints put the actual token value in place of <code>&lt;token&gt;
 
 <p>Simply append the name=value pair(s) onto the querystring of the assessment link you receive. For example:</p>
 
-<p><code class="prettyprint">https://www.selfmgmt.com/assess/?t=pops&amp;l=eng&amp;c=f61cPNA....&amp;firstname=jane&amp;lastname=doe</code></p>
+<p><code class="prettyprint">https://www.selfmgmt.com/assess/lpro/eng/MinTz2S5hhd.../smg/&amp;firstname=Jane&amp;lastname=Doe</code></p>
 
 <h2 id="assessmentresults">/assessmentResults</h2>
 <pre class="highlight shell"><code>curl -H <span class="s2">"Authorization:Bearer &lt;token&gt;"</span>  https://www.selfmgmt.com/api/assessmentResults/pops/eng/idValue

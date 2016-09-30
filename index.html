@@ -256,7 +256,7 @@ Make sure to replace `your_public_key` and `your_private_key` with your respecti
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"assessment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.selfmgmt.com/pac/assess/FQQcc4sU5hll7XQO0PlQ72ZIwwcpVX8kzfb"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.selfmgmt.com/assess/?t=lpro&amp;l=eng&amp;c=MinTz2S5hhdp8fjcyTMas9dnTk1NDhBFQQcc4sU5hll7X8kzfb&amp;b=smg"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cc4sU5hll7XQO0PlQ72ZIwwcpVX8kzfb"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -318,7 +318,7 @@ As with all endpoints put the actual token value in place of <code>&lt;token&gt;
 
 <p>Simply append the name=value pair(s) onto the querystring of the assessment link you receive. For example:</p>
 
-<p><code class="prettyprint">https://www.selfmgmt.com/pac/assess/?t=pops&amp;l=eng&amp;c=f61cPNA&amp;firstname=jane&amp;lastname=doe</code></p>
+<p><code class="prettyprint">https://www.selfmgmt.com/assess/?t=pops&amp;l=eng&amp;c=f61cPNA....&amp;firstname=jane&amp;lastname=doe</code></p>
 
 <h2 id="assessmentresults">/assessmentResults</h2>
 <pre class="highlight shell"><code>curl -H <span class="s2">"Authorization:Bearer &lt;token&gt;"</span>  https://www.selfmgmt.com/api/assessmentResults/pops/eng/idValue
@@ -348,17 +348,9 @@ As with all endpoints put the actual token value in place of <code>&lt;token&gt;
         </span><span class="nt">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"416-555-1212"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample@yahoo.com"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"scores"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"talent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.0"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"effort"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.0"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"opport"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.0"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.0"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"recommendation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Proceed"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"stoplight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Green"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
       </span><span class="nt">"reports"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"manager"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://selfmgmt.com/api/v1/reports/pops/m/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"candidate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://selfmgmt.com/ api/v1/reports/pops/c/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq"</span><span class="w">
+        </span><span class="nt">"manager"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://selfmgmt.com/reports/pops/m/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"candidate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://selfmgmt.com/reports/pops/c/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -367,7 +359,7 @@ As with all endpoints put the actual token value in place of <code>&lt;token&gt;
 
 <p>Retrieves results from an assessment taken.  You must pass the test type (e.g, POPS), the language (e.g., en), followed by the ID we generate for you passed to us in the <code class="prettyprint">/assessmentLink</code> endpoint.</p>
 
-<p>If you have a callback url, the test taker will be redirected to the page once they click on a Continue Button after the results are saved.  All form data will be posted as well.</p>
+<p>If you have a callback url, the test taker will be redirected to the page once they click on a Continue Button after the results are saved.  We will append the id to the callback page (e.g., https://www.yoursite.com/markdone.asp?id=1234567890).</p>
 
           <h1 id="language-codes">Language Codes</h1>
 

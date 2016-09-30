@@ -238,5 +238,5 @@ response.parsed
 
 Retrieves results from an assessment taken.  You must pass the test type (e.g, POPS), the language (e.g., en), followed by the ID we generate for you passed to us in the `/assessmentLink` endpoint.
 
-If you have a callback url, the test taker will be redirected to the page once they click on a Continue Button after the results are saved.  All form data will be posted as well.
+If you have a callback url, the test taker will be redirected to the page once they click on a Continue Button after the results are saved.  We will append the id to the callback page (e.g., https://www.yoursite.com/markdone.asp?id=1234567890).
 

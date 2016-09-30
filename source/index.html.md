@@ -162,7 +162,7 @@ response.parsed
 ```json
 {
   "assessment": {
-    "link": "https://www.selfmgmt.com/assess/?t=lpro&l=eng&c=MinTz2S5hhdp8fjcyTMas9dnTk1NDhBFQQcc4sU5hll7X8kzfb&b=smg",
+    "link": "https://www.selfmgmt.com/assess/lpro/eng/MinTz2S5hhdp8fjcyTMas9dnTk1NDhBFQQcc4sU5hll7X8kzfb/smg",
     "id": "cc4sU5hll7XQO0PlQ72ZIwwcpVX8kzfb"
   }
 }
@@ -195,7 +195,7 @@ email | The email address of the candidate
 
 Simply append the name=value pair(s) onto the querystring of the assessment link you receive. For example:
 
-`https://www.selfmgmt.com/assess/?t=pops&l=eng&c=f61cPNA....&firstname=jane&lastname=doe`
+`https://www.selfmgmt.com/assess/lpro/eng/MinTz2S5hhd.../smg/&firstname=Jane&lastname=Doe`
 
 ## /assessmentResults
 

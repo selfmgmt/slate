@@ -162,7 +162,7 @@ response.parsed
 ```json
 {
   "assessment": {
-    "link": "https://www.selfmgmt.com/pac/assess/FQQcc4sU5hll7XQO0PlQ72ZIwwcpVX8kzfb",
+    "link": "https://www.selfmgmt.com/assess/?t=lpro&l=eng&c=MinTz2S5hhdp8fjcyTMas9dnTk1NDhBFQQcc4sU5hll7X8kzfb&b=smg",
     "id": "cc4sU5hll7XQO0PlQ72ZIwwcpVX8kzfb"
   }
 }
@@ -195,7 +195,7 @@ email | The email address of the candidate
 
 Simply append the name=value pair(s) onto the querystring of the assessment link you receive. For example:
 
-`https://www.selfmgmt.com/pac/assess/?t=pops&l=eng&c=f61cPNA&firstname=jane&lastname=doe`
+`https://www.selfmgmt.com/assess/?t=pops&l=eng&c=f61cPNA....&firstname=jane&lastname=doe`
 
 ## /assessmentResults
 
@@ -227,17 +227,9 @@ response.parsed
         "telephone": "416-555-1212",
         "email": "sample@yahoo.com"
       },
-      "scores": {
-        "talent": "3.0",
-        "effort": "4.0",
-        "opport": "5.0",
-        "total": "4.0",
-        "recommendation": "Proceed",
-        "stoplight": "Green"
-      },
       "reports": {
-        "manager": "https://selfmgmt.com/api/v1/reports/pops/m/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq",
-        "candidate": "https://selfmgmt.com/ api/v1/reports/pops/c/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq"
+        "manager": "https://selfmgmt.com/reports/pops/m/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq",
+        "candidate": "https://selfmgmt.com/reports/pops/c/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq"
       }
     }
   ]

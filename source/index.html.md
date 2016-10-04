@@ -157,12 +157,12 @@ token = get_token
 response = token.get('assessmentLink/pops/eng')
 response.parsed
 ```
-> The above command returns JSON structured like this:
+> The above command returns JSON structured similar to this:
 
 ```json
 {
   "assessment": {
-    "link": "https://www.selfmgmt.com/assess/lpro/eng/MinTz2S5hhdp8fjcyTMas9dnTk1NDhBFQQcc4sU5hll7X8kzfb/smg",
+    "link": "https://www.selfmgmt.com/assess/lpro/eng/MinTz2S5hhdp8fjcyTMas9dnTk1NDhBFQQcc4sU5hll7X8kzfb",
     "id": "cc4sU5hll7XQO0PlQ72ZIwwcpVX8kzfb"
   }
 }
@@ -195,7 +195,7 @@ email | The email address of the candidate
 
 Simply append the name=value pair(s) onto the querystring of the assessment link you receive. For example:
 
-`https://www.selfmgmt.com/assess/lpro/eng/MinTz2S5hhd.../smg/&firstname=Jane&lastname=Doe`
+`https://www.selfmgmt.com/assess/lpro/eng/MinTz2S5hhd?firstname=Jane&lastname=Doe`
 
 ## /assessmentResults
 

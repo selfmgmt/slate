@@ -303,6 +303,10 @@ As with all endpoints put the actual token value in place of <code>&lt;token&gt;
 <td>The zip/postal code of the candidate</td>
 </tr>
 <tr>
+<td>state</td>
+<td>The state of the candidate</td>
+</tr>
+<tr>
 <td>country</td>
 <td>The country of the candidate</td>
 </tr>
@@ -321,7 +325,7 @@ As with all endpoints put the actual token value in place of <code>&lt;token&gt;
 <p><code class="prettyprint">https://www.selfmgmt.com/assess/lpro/eng/MinTz2S5hhdeuueY7363bvcss4a/&amp;firstname=Jane&amp;lastname=Doe</code></p>
 
 <h2 id="assessmentresults">/assessmentResults</h2>
-<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization:Bearer &lt;token&gt;"</span>  https://www.selfmgmt.com/api/assessmentResults/pops/eng/idValue
+<pre class="highlight shell"><code>curl -H <span class="s2">"Authorization:Bearer &lt;token&gt;"</span>  https://www.selfmgmt.com/api/v1/assessmentResults/pops/eng/idValue
 </code></pre>
 <pre class="highlight ruby"><code><span class="n">token</span> <span class="o">=</span> <span class="n">get_token</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">token</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'assessmentResults/pops/eng/idValue'</span><span class="p">)</span>

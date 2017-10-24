@@ -189,6 +189,7 @@ lastname | The last name of the candidate
 address | The street address of the candidate
 city | The city of the candidate
 zipcode | The zip/postal code of the candidate
+state | The state of the candidate
 country | The country of the candidate
 telephone | The telephone number of the candidate
 email | The email address of the candidate
@@ -200,7 +201,7 @@ Simply append the name=value pair(s) onto the querystring of the assessment link
 ## /assessmentResults
 
 ```shell
-curl -H "Authorization:Bearer <token>"  https://www.selfmgmt.com/api/assessmentResults/pops/eng/idValue
+curl -H "Authorization:Bearer <token>"  https://www.selfmgmt.com/api/v1/assessmentResults/pops/eng/idValue
 ```
 ```ruby
 token = get_token

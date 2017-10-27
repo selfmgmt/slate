@@ -196,7 +196,7 @@ email | The email address of the candidate
 
 Simply append the name=value pair(s) onto the querystring of the assessment link you receive. For example:
 
-`https://www.selfmgmt.com/assess/lpro/eng/MinTz2S5hhdeuueY7363bvcss4a/&firstname=Jane&lastname=Doe`
+`https://www.selfmgmt.com/.../&firstname=Jane&lastname=Doe`
 
 ## /assessmentResults
 
@@ -214,30 +214,27 @@ response.parsed
 {
   "records": [
     {
-      "id": "B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq",
-      "date": "2016/08/16",
-      "personal": {
-        "firstname": "Sample",
-        "lastname": "Candidate",
-        "gender": "",
+    "assessmentResults": [{
+        "id": "XQUXSLPSESDR",
+        "testDate": "2017/10/26",
+        "firstName": "Jane",
+        "lastName": "Sample",
+        "gender": "F",
         "address": "123 Main St.",
-        "city": "Toronto",
-        "state": "Ontario",
-        "zipcode": "N2T 2J8",
-        "country": "Canada",
-        "telephone": "416-555-1212",
-        "email": "sample@yahoo.com"
-      },
-      "reports": {
-        "manager": "https://selfmgmt.com/reports/pops/m/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq",
-        "candidate": "https://selfmgmt.com/reports/pops/c/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq"
-      }
+        "city": "Buffalo",
+        "state": "New York",
+        "zipcode": "22345",
+        "phone": "555-1212",
+        "email": "jsample@yahoo.com",
+        "country": "USA",
+        "reportLink": "https://www.selfmgmt.com/pac/reports/spro/XQUXSLPSESDR/m/eng"
     }
   ]
+}
 }
 ```
 
 Retrieves results from an assessment taken.  You must pass the test type (e.g, POPS), the language (e.g., en), followed by the ID we generate for you passed to us in the `/assessmentLink` endpoint.
 
-If you have a callback url, the test taker will be redirected to the page once they click on a Continue Button after the results are saved.  We will append the id to the callback page (e.g., https://www.yoursite.com/markdone.asp?id=1234567890).
+If you have a custom callback url, please contact us for further information on how we implement this for you.
 

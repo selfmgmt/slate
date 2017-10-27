@@ -322,7 +322,7 @@ As with all endpoints put the actual token value in place of <code>&lt;token&gt;
 
 <p>Simply append the name=value pair(s) onto the querystring of the assessment link you receive. For example:</p>
 
-<p><code class="prettyprint">https://www.selfmgmt.com/assess/lpro/eng/MinTz2S5hhdeuueY7363bvcss4a/&amp;firstname=Jane&amp;lastname=Doe</code></p>
+<p><code class="prettyprint">https://www.selfmgmt.com/.../&amp;firstname=Jane&amp;lastname=Doe</code></p>
 
 <h2 id="assessmentresults">/assessmentResults</h2>
 <pre class="highlight shell"><code>curl -H <span class="s2">"Authorization:Bearer &lt;token&gt;"</span>  https://www.selfmgmt.com/api/v1/assessmentResults/pops/eng/idValue
@@ -338,32 +338,29 @@ As with all endpoints put the actual token value in place of <code>&lt;token&gt;
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"records"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016/08/16"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"personal"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"firstname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sample"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"lastname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Candidate"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"assessmentResults"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XQUXSLPSESDR"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"testDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017/10/26"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sample"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123 Main St."</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Toronto"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ontario"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N2T 2J8"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"416-555-1212"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample@yahoo.com"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"reports"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"manager"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://selfmgmt.com/reports/pops/m/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"candidate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://selfmgmt.com/reports/pops/c/B0bAoHpUM4UHvbVmPdbrlYzToMSCe5pq"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
+        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buffalo"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New York"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22345"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-1212"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jsample@yahoo.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USA"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"reportLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.selfmgmt.com/pac/reports/spro/XQUXSLPSESDR/m/eng"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
+</span><span class="err">}</span><span class="w">
 </span></code></pre>
 
 <p>Retrieves results from an assessment taken.  You must pass the test type (e.g, POPS), the language (e.g., en), followed by the ID we generate for you passed to us in the <code class="prettyprint">/assessmentLink</code> endpoint.</p>
 
-<p>If you have a callback url, the test taker will be redirected to the page once they click on a Continue Button after the results are saved.  We will append the id to the callback page (e.g., https://www.yoursite.com/markdone.asp?id=1234567890).</p>
+<p>If you have a custom callback url, please contact us for further information on how we implement this for you.</p>
 
           <h1 id="language-codes">Language Codes</h1>
 

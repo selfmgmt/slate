@@ -212,25 +212,21 @@ response.parsed
 
 ```json
 {
-  "records": [
-    {
-    "assessmentResults": [{
-        "id": "XQUXSLPSESDR",
-        "testDate": "2017/10/26",
-        "firstName": "Jane",
-        "lastName": "Sample",
-        "gender": "F",
-        "address": "123 Main St.",
-        "city": "Buffalo",
-        "state": "New York",
-        "zipcode": "22345",
-        "phone": "555-1212",
-        "email": "jsample@yahoo.com",
-        "country": "USA",
-        "reportLink": "https://www.selfmgmt.com/pac/reports/spro/XQUXSLPSESDR/m/eng"
-    }
-  ]
-}
+  "assessmentResults": [{
+    "id": "XQUXSLPSESDR",
+    "testDate": "2017/10/26",
+    "firstName": "Jane",
+    "lastName": "Sample",
+    "gender": "F",
+    "address": "123 Main St.",
+    "city": "Buffalo",
+    "state": "New York",
+    "zipcode": "22345",
+    "phone": "555-1212",
+    "email": "jsample@yahoo.com",
+    "country": "USA",
+    "reportLink": "https://www.selfmgmt.com/pac/reports/spro/XQUXSLPSESDR/m/eng"
+  }]
 }
 ```
 

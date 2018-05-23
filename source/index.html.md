@@ -196,7 +196,7 @@ email | The email address of the candidate
 
 Simply append the name=value pair(s) onto the querystring of the assessment link you receive. For example:
 
-`https://www.selfmgmt.com/.../&firstname=Jane&lastname=Doe`
+`&lt;link&gt;&firstname=Jane&lastname=Doe`
 
 ## /assessmentResults
 

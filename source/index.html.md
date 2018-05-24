@@ -196,7 +196,7 @@ email | The email address of the candidate
 
 Simply append the name=value pair(s) onto the querystring of the assessment link you receive. For example:
 
-`&lt;link&gt;&firstname=Jane&lastname=Doe`
+`<link>&firstname=Jane&lastname=Doe`
 
 ## /assessmentResults
 
